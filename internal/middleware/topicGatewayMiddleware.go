@@ -39,7 +39,7 @@ func (m *TopicGatewayMiddleware) TopicTransformer(transformer internal.NameTrans
 
 func (m *TopicGatewayMiddleware) performBindTopicGateway(target interface{}, binder *TopicGatewayBinder) error {
 	prototype, err := structproto.Prototypify(target,
-		&structproto.StructProtoOption{
+		&structproto.StructProtoResolveOption{
 			TagName:     TAG_TOPIC,
 			TagResolver: TopicTagResolve,
 		},

@@ -6,6 +6,7 @@ import (
 
 	"github.com/bcowtech/host"
 	"github.com/bcowtech/structproto"
+	"github.com/bcowtech/structproto/tagresolver"
 	"github.com/bcowtech/structproto/util/reflectutil"
 	"github.com/bcowtech/worker-kafka/internal"
 )
@@ -52,8 +53,8 @@ func (b *TopicGatewayBinder) Deinit(context *structproto.StructProtoContext) err
 
 func (b *TopicGatewayBinder) preformBindMessageHandler(target reflect.Value, binder *MessageHandlerBinder) error {
 	prototype, err := structproto.Prototypify(target,
-		&structproto.StructProtoOption{
-			TagResolver: NoneTagResolver,
+		&structproto.StructProtoResolveOption{
+			TagResolver: tagresolver.NoneTagResolver,
 		})
 	if err != nil {
 		return err

@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/bcowtech/config"
-	"github.com/bcowtech/host"
 	kafka "github.com/bcowtech/worker-kafka"
 )
 
@@ -16,15 +15,15 @@ func TestStarter(t *testing.T) {
 	)
 
 	app := App{}
-	starter := kafka.Startup(&app,
-		[]host.Middleware{
+	starter := kafka.Startup(&app).
+		Middlewares(
 			kafka.UseGroupIDTransformer(KafkaNameFormatter),
 			kafka.UseTopicGateway(&TopicGateway{}).
 				TopicTransformer(KafkaNameFormatter),
 			kafka.UseErrorHandler(func(err kafka.Error) (disposed bool) {
 				return false
 			}),
-		}...).
+		).
 		ConfigureConfiguration(func(service *config.ConfigurationService) {
 			service.
 				LoadEnvironmentVariables("").

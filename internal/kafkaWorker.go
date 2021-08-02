@@ -78,7 +78,7 @@ func (w *KafkaWorker) Stop(ctx context.Context) error {
 		logger.Printf("%% Stopped\n")
 	}()
 
-	w.consumer.Stop()
+	w.consumer.Close()
 	return nil
 }
 
