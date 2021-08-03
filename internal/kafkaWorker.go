@@ -34,10 +34,10 @@ type KafkaWorker struct {
 
 func (w *KafkaWorker) Start(ctx context.Context) {
 	if w.disposed {
-		logger.Panic("the KafkaWorker has been disposed")
+		logger.Panic("the Worker has been disposed")
 	}
 	if !w.initialized {
-		logger.Panic("the KafkaWorker havn't be initialized yet")
+		logger.Panic("the Worker havn't be initialized yet")
 	}
 	if w.running {
 		return
