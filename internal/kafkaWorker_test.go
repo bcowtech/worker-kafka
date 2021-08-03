@@ -11,7 +11,7 @@ import (
 )
 
 func TestKafkaWorker(t *testing.T) {
-	err := setupTest()
+	err := setupTestKafkaWorker()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -44,11 +44,11 @@ func TestKafkaWorker(t *testing.T) {
 
 type mockMessageHandler struct{}
 
-func (h *mockMessageHandler) ProcessMessage(worker *ConsumeWorker, message *Message) {
+func (h *mockMessageHandler) ProcessMessage(ctx *ConsumeContext, message *Message) {
 	fmt.Printf("Message on %s: %s: %s\n", message.TopicPartition, string(message.Key), string(message.Value))
 }
 
-func setupTest() error {
+func setupTestKafkaWorker() error {
 	p, err := kafka.NewProducer(&kafka.ProducerOption{
 		FlushTimeout: 3 * time.Second,
 		PingTimeout:  3 * time.Second,
@@ -60,6 +60,7 @@ func setupTest() error {
 	if err != nil {
 		return err
 	}
+	defer p.Close()
 
 	topic := "myTopic"
 	for _, word := range []string{"Welcome", "to", "the", "Confluent", "Kafka", "Golang", "client"} {
@@ -68,6 +69,5 @@ func setupTest() error {
 			Value:          []byte(word),
 		}, nil)
 	}
-	p.Close()
 	return nil
 }

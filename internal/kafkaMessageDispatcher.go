@@ -30,7 +30,7 @@ func (d *KafkaMessageDispatcher) Topics() []string {
 	return nil
 }
 
-func (d *KafkaMessageDispatcher) ProcessMessage(worker *ConsumeWorker, message *Message) {
+func (d *KafkaMessageDispatcher) ProcessMessage(ctx *ConsumeContext, message *Message) {
 
 	// TODO: handle error
 	// defer func() {
@@ -46,15 +46,15 @@ func (d *KafkaMessageDispatcher) ProcessMessage(worker *ConsumeWorker, message *
 
 	handler := d.router.Get(topic)
 	if handler != nil {
-		handler.ProcessMessage(worker, message)
+		handler.ProcessMessage(ctx, message)
 	} else {
-		worker.ForwardUnhandledMessage(message)
+		ctx.ForwardUnhandledMessage(message)
 	}
 }
 
-func (d *KafkaMessageDispatcher) ProcessUnhandledMessage(worker *ConsumeWorker, message *Message) {
+func (d *KafkaMessageDispatcher) ProcessUnhandledMessage(ctx *ConsumeContext, message *Message) {
 	if d.unhandledMessageHandler != nil {
-		d.unhandledMessageHandler.ProcessMessage(worker, message)
+		d.unhandledMessageHandler.ProcessMessage(ctx, message)
 	}
 }
 

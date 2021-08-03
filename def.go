@@ -25,7 +25,7 @@ type (
 	TopicPartition        = kafka.TopicPartition
 
 	Consumer        = kafka.Consumer
-	ConsumeWorker   = kafka.ConsumeWorker
+	ConsumeContext  = kafka.ConsumeContext
 	Forwarder       = kafka.Forwarder
 	ForwarderOption = kafka.ForwarderOption
 	ForwarderRunner = kafka.ForwarderRunner

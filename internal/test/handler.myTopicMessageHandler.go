@@ -17,6 +17,6 @@ func (h *MyTopicMessageHandler) Init() {
 	fmt.Println("MyTopicMessageHandler.Init()")
 }
 
-func (h *MyTopicMessageHandler) ProcessMessage(ctx *kafka.ConsumeWorker, message *kafka.Message) {
+func (h *MyTopicMessageHandler) ProcessMessage(ctx *kafka.ConsumeContext, message *kafka.Message) {
 	log.Printf("Message on %s: %s: %s\n", message.TopicPartition, string(message.Key), string(message.Value))
 }

@@ -2,6 +2,8 @@ package test
 
 import (
 	"context"
+	"fmt"
+	"os"
 	"testing"
 	"time"
 
@@ -10,6 +12,11 @@ import (
 )
 
 func TestStarter(t *testing.T) {
+	err := setupTestStarter()
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	var (
 		KafkaNameFormatter kafka.NameTransformProc = kafka.NameFormatter("%s-${KAFKA_TOPIC_SUFFIX}")
 	)
@@ -59,4 +66,29 @@ func TestStarter(t *testing.T) {
 			t.Errorf("assert 'Config.PollingTimeout':: expected '%v', got '%v'", expectedPollingTimeout, conf.PollingTimeout)
 		}
 	}
+}
+
+func setupTestStarter() error {
+	f, err := kafka.NewForwarder(&kafka.ForwarderOption{
+		FlushTimeout: 3 * time.Second,
+		PingTimeout:  3 * time.Second,
+		ConfigMap: &kafka.ConfigMap{
+			"client.id":         "gotest",
+			"bootstrap.servers": os.Getenv("KAFKA_BOOTSTRAP_SERVERS"),
+		},
+	})
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	topic := "myTopic"
+	realTopic := fmt.Sprintf(os.ExpandEnv("%s-${KAFKA_TOPIC_SUFFIX}"), topic)
+	for _, word := range []string{"Welcome", "to", "the", "Confluent", "Kafka", "Golang", "client"} {
+		f.WriteMessage(&kafka.Message{
+			TopicPartition: kafka.TopicPartition{Topic: &realTopic, Partition: kafka.PartitionAny},
+			Value:          []byte(word),
+		}, nil)
+	}
+	return nil
 }

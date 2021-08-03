@@ -4,8 +4,8 @@ github.com/bcowtech/config v0.0.0-20210615123440-992bfe47f7b8 h1:yKdbf4XxfvoECYC
 github.com/bcowtech/config v0.0.0-20210615123440-992bfe47f7b8/go.mod h1:fzdFgTr1gz7yU+gc8cj1wScXU7LtE4RoQnC0IqBUYhw=
 github.com/bcowtech/host v0.0.0-20210615123725-0541d424bd4b h1:5sswaLOaxydEmGIV2ThFvFTDCKJ14PfQ8+1wdyyRZP0=
 github.com/bcowtech/host v0.0.0-20210615123725-0541d424bd4b/go.mod h1:aa2RMyhWlDZSvMUqgsWb6OZAGR1VywqUC5DfzwozZD8=
-github.com/bcowtech/lib-kafka v0.1.1-0.20210802040748-078469ced4d6 h1:N7GGOPdBFBFCrW1fosYmo868oa/SP+GcT4d2Fr/x2To=
-github.com/bcowtech/lib-kafka v0.1.1-0.20210802040748-078469ced4d6/go.mod h1:C40n3W389GeAgV7BZoKrNd5SDc5qJz3cBqP7W5MRMCc=
+github.com/bcowtech/lib-kafka v0.1.1-0.20210803165139-bca9e3ef2a85 h1:c8y/KJQYlX5xIsDFW/5TcoFYXzL87ArDkB2KUWZaIro=
+github.com/bcowtech/lib-kafka v0.1.1-0.20210803165139-bca9e3ef2a85/go.mod h1:C40n3W389GeAgV7BZoKrNd5SDc5qJz3cBqP7W5MRMCc=
 github.com/bcowtech/structproto v0.1.1-0.20210615123004-62919aed6983 h1:Wj4ZKjenBd6vZa3HG7bDo3qBDnTZ58c4jInktV1mCxM=
 github.com/bcowtech/structproto v0.1.1-0.20210615123004-62919aed6983/go.mod h1:E8f3zYlTM+nAs82xAKmzP60+zsEhXecIxjlTW28uIg4=
 github.com/bcowtech/types v0.1.0 h1:MrUadVmRc22FL3VUWQyX9Ytzia7zKgD+FsxApmBDJ44=

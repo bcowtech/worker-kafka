@@ -26,7 +26,7 @@ var (
 // interface & struct
 type (
 	Consumer       = kafka.Consumer
-	ConsumeWorker  = kafka.ConsumeWorker
+	ConsumeContext = kafka.ConsumeContext
 	ConfigMap      = kafka.ConfigMap
 	Message        = kafka.Message
 	TopicPartition = kafka.TopicPartition
@@ -36,7 +36,7 @@ type (
 	RebalanceCb    = kafka.RebalanceCb
 
 	MessageHandler interface {
-		ProcessMessage(worker *ConsumeWorker, message *Message)
+		ProcessMessage(ctx *ConsumeContext, message *Message)
 	}
 )
 
