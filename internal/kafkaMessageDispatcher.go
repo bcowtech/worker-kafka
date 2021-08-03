@@ -33,12 +33,12 @@ func (d *KafkaMessageDispatcher) Topics() []string {
 func (d *KafkaMessageDispatcher) ProcessMessage(worker *ConsumeWorker, message *Message) {
 
 	// TODO: handle error
-	defer func() {
-		// err := recover()
-		// if err != nil {
-		// 	d.errorHandler(err)
-		// }
-	}()
+	// defer func() {
+	// 	err := recover()
+	// 	if err != nil {
+	// 		d.errorHandler(err)
+	// 	}
+	// }()
 
 	var (
 		topic string = *message.TopicPartition.Topic

@@ -26,7 +26,7 @@ type KafkaWorker struct {
 	groupIDTransformer NameTransformProc
 
 	wg          sync.WaitGroup
-	locker      Locker
+	mutex       sync.Mutex
 	initialized bool
 	running     bool
 	disposed    bool
@@ -44,20 +44,16 @@ func (w *KafkaWorker) Start(ctx context.Context) {
 	}
 
 	var err error
+	w.mutex.Lock()
 	defer func() {
 		if err != nil {
-			w.locker.Lock(
-				func() {
-					w.running = false
-					w.disposed = true
-				})
+			w.running = false
+			w.disposed = true
 		}
+		w.mutex.Unlock()
 	}()
 
-	w.locker.Lock(
-		func() {
-			w.running = true
-		})
+	w.running = true
 
 	c := w.consumer
 
@@ -92,15 +88,16 @@ func (w *KafkaWorker) init() {
 		return
 	}
 
+	w.mutex.Lock()
+	defer func() {
+		w.initialized = true
+		w.mutex.Unlock()
+	}()
+
 	w.configTopics()
 	w.configBootstrapServers()
 	w.configGroupID()
 	w.configConsumer()
-
-	w.locker.Lock(
-		func() {
-			w.initialized = true
-		})
 }
 
 func (w *KafkaWorker) configTopics() {
