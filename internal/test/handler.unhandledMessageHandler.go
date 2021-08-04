@@ -14,6 +14,6 @@ func (h *UnhandledMessageHandler) Init() {
 	fmt.Println("UnhandledMessageHandler.Init()")
 }
 
-func (h *UnhandledMessageHandler) ProcessMessage(ctx *kafka.ConsumeContext, message *kafka.Message) {
+func (h *UnhandledMessageHandler) ProcessMessage(ctx *kafka.WorkerContext, message *kafka.Message) {
 	fmt.Println("UnhandledMessageHandler.ProcessMessage()")
 }

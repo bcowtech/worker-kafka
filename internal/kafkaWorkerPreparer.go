@@ -1,27 +1,27 @@
 package internal
 
 type KafkaWorkerPreparer struct {
-	subject *KafkaWorker
+	worker *KafkaWorker
 }
 
-func NewKafkaWorkerPreparer(subject *KafkaWorker) *KafkaWorkerPreparer {
+func NewKafkaWorkerPreparer(worker *KafkaWorker) *KafkaWorkerPreparer {
 	return &KafkaWorkerPreparer{
-		subject: subject,
+		worker: worker,
 	}
 }
 
 func (p *KafkaWorkerPreparer) RegisterErrorHandler(handler KafkaErrorHandleProc) {
-	p.subject.dispatcher.kafkaErrorHandler = handler
+	p.worker.dispatcher.kafkaErrorHandler = handler
 }
 
 func (p *KafkaWorkerPreparer) RegisterGroupIDTransformer(transformer NameTransformProc) {
-	p.subject.groupIDTransformer = transformer
+	p.worker.groupIDTransformer = transformer
 }
 
 func (p *KafkaWorkerPreparer) RegisterUnhandledMessageHandler(handler MessageHandler) {
-	p.subject.dispatcher.unhandledMessageHandler = handler
+	p.worker.dispatcher.unhandledMessageHandler = handler
 }
 
 func (p *KafkaWorkerPreparer) Router() Router {
-	return p.subject.dispatcher.router
+	return p.worker.dispatcher.router
 }

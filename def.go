@@ -24,20 +24,17 @@ type (
 	RebalanceCb           = kafka.RebalanceCb
 	TopicPartition        = kafka.TopicPartition
 
-	Consumer        = kafka.Consumer
-	ConsumeContext  = kafka.ConsumeContext
 	Forwarder       = kafka.Forwarder
 	ForwarderOption = kafka.ForwarderOption
 	ForwarderRunner = kafka.ForwarderRunner
-	Producer        = kafka.Producer
-	ProducerOption  = kafka.ProducerOption
+	WorkerContext   = kafka.ConsumeContext
 
-	MessageHandler    = internal.MessageHandler
-	NameTransformProc = internal.NameTransformProc
-	Worker            = internal.KafkaWorker
+	MessageHandler = internal.MessageHandler
+	Worker         = internal.KafkaWorker
 )
 
 // func
 type (
+	NameTransformProc    = internal.NameTransformProc
 	KafkaErrorHandleProc = internal.KafkaErrorHandleProc
 )
