@@ -62,9 +62,11 @@ func (w *KafkaWorker) Start(ctx context.Context) {
 		strings.Join(w.topics, ","),
 		w.bootstrapServers)
 
-	err = c.Subscribe(w.topics, nil)
-	if err != nil {
-		logger.Panic(err)
+	if len(w.topics) > 0 {
+		err = c.Subscribe(w.topics, nil)
+		if err != nil {
+			logger.Panic(err)
+		}
 	}
 }
 
