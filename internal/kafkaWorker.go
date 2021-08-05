@@ -55,14 +55,13 @@ func (w *KafkaWorker) Start(ctx context.Context) {
 
 	w.running = true
 
-	c := w.consumer
-
 	logger.Printf("group [%s] listening topics [%s] on address %s\n",
 		w.groupID,
 		strings.Join(w.topics, ","),
 		w.bootstrapServers)
 
 	if len(w.topics) > 0 {
+		c := w.consumer
 		err = c.Subscribe(w.topics, nil)
 		if err != nil {
 			logger.Panic(err)
