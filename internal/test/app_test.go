@@ -28,6 +28,7 @@ func TestStarter(t *testing.T) {
 			kafka.UseTopicGateway(&TopicGateway{}).
 				TopicTransformer(KafkaNameFormatter),
 			kafka.UseErrorHandler(func(err kafka.Error) (disposed bool) {
+				t.Logf("catch err: %v", err)
 				return false
 			}),
 		).
